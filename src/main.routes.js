@@ -1,7 +1,7 @@
 import { lazy } from 'react';
-
-import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import LazyLoading from '_common/components/LazyLoading';
+import MainLayoutView from '_common/layouts/MainLayout/MainLayoutView';
 
 const DashboardRoutes = lazy(() => import('modules/dashboard/dashboard.routes'));
 const TasksRoutes = lazy(() => import('modules/tasks/tasks.routes'));
@@ -9,33 +9,14 @@ const UsersRoutes = lazy(() => import('modules/users/users.routes'));
 
 const MainRoutes = () => {
   return (
-    <BrowserRouter>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/tarefas">Tarefas</Link>
-            </li>
-            <li>
-              <Link to="/usuarios">Usuários</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-        renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/dashboard" component={LazyLoading(DashboardRoutes)} />
-          <Route path="/tarefas" component={LazyLoading(TasksRoutes)} />
-          <Route path="/usuarios" component={LazyLoading(UsersRoutes)} />
-
-          <Redirect to="/dashboard" />
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <MainLayoutView>
+    <Switch>
+      <Route path="/dashboard" component={LazyLoading(DashboardRoutes)} />
+      <Route path="/tarefas" component={LazyLoading(TasksRoutes)} />
+      <Route path="/usuarios" component={LazyLoading(UsersRoutes)} />
+      <Redirect to="/dashboard" />
+    </Switch>
+    </MainLayoutView>
   );
 };
 

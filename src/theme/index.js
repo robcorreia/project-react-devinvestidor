@@ -16,6 +16,12 @@ const theme = createTheme({
   },
   shape: {
     borderRadius: 0
+  },
+  props: {
+    MuiButton: {
+      variant: 'contained',
+      color: 'primary'
+    }
   }
 });
 
